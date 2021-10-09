@@ -1,11 +1,9 @@
 import { useQuery } from "react-query";
-import { Footer } from "./common/Footer";
-import { Header } from "./common/Hedear";
-import { Nav } from "./common/Nav";
+import  Footer  from "./common/Footer";
+import  Header  from "./common/Hedear";
 import axios from "axios";
-import { Trend } from "./products/Trend";
-import { ListProduct } from "./products/ListProduct";
-import { useEffect, useState } from "react";
+import  Trend  from "./products/Trend";
+import  ListProduct  from "./products/ListProduct";
 import Contact from "./common/Contact";
 
 const fetchHomePage = async () => {
@@ -17,11 +15,6 @@ const fetchHomePage = async () => {
 
 export default function Home() {
   const result = useQuery("homepage", fetchHomePage);
-
-  const [categories, setCategories] = useState([]);
-  // useEffect(() => {
-  //   setCategories(result.data?.featureproduct.map((el) => el.category));
-  // }, [result.isSuccess]);
   if (result.isLoading) return <div>loading</div>;
   if (result.isSuccess)
     return (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Slider from "react-slick";
-import { Nav } from "./Nav";
+import Nav  from "./Nav";
 
 const menu = [
   {
@@ -41,7 +41,7 @@ const setting = {
   autoplay: true,
 };
 
-export const Header = () => {
+const Header = () => {
   const [isActive, setActive] = useState(false);
   return (
     <div className="relative">
@@ -79,4 +79,6 @@ export const Header = () => {
       </div>
     </div>
   );
+
 };
+export default Header;

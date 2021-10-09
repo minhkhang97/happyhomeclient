@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Slider from "react-slick";
-import { ProductItem2 } from "./components/ProductItem2";
+import ProductItem2 from "./components/ProductItem2";
 
 const rem = ["rèm cồng vồng", "rèm vải", "rèm cuốn", "rèm gỗ", "rèm voan"];
 
@@ -43,7 +43,7 @@ const settings2 = {
   slidesToScroll: 3,
 };
 
-export const ListProduct = ({ data }) => {
+const ListProduct = ({ data }) => {
   const [categories, setCategories] = useState([
     ...data.map((el) => el.category),
   ]);
@@ -94,3 +94,5 @@ export const ListProduct = ({ data }) => {
     </div>
   );
 };
+
+export default ListProduct

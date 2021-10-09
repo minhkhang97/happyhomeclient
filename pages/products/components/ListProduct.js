@@ -11,7 +11,7 @@ const fetchProducts = async () => {
   return res;
 };
 
-export const ListProduct = ({products}) => {
+const ListProduct = ({products}) => {
 
   console.log(products);
 
@@ -24,3 +24,4 @@ export const ListProduct = ({products}) => {
       </div>
     );
 };
+export default ListProduct

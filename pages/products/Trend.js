@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import { ProductItem } from "./ProductItem";
+import ProductItem from "./ProductItem";
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
@@ -39,7 +39,7 @@ const settings = {
   ],
 };
 
-export const Trend = ({ title, products }) => {
+const Trend = ({ title, products }) => {
   return (
     <div className="w-10/12 m-auto my-10">
       <h2 className="text-center uppercase font-semibold text-gray-900 mb-6">
@@ -60,3 +60,4 @@ export const Trend = ({ title, products }) => {
     </div>
   );
 };
+export default Trend

@@ -1,7 +1,7 @@
 import Image from "next//image";
 import Link from "next/link";
 
-export const ProductItem2 = ({ id, name, price, discount, photos, categoryId }) => {
+const ProductItem2 = ({ id, name, price, discount, photos, categoryId }) => {
   const externaImageLoader = ({ url }) =>
     `https://rocky-springs-26824.herokuapp.com${url}`;
   return (
@@ -21,3 +21,5 @@ export const ProductItem2 = ({ id, name, price, discount, photos, categoryId }) 
     </div>
   );
 };
+
+export default ProductItem2

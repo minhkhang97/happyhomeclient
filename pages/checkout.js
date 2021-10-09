@@ -1,8 +1,8 @@
-import { Nav } from "./common/Nav";
-import { Footer } from "./common/Footer";
+import  Nav  from "./common/Nav";
+import  Footer  from "./common/Footer";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { CartContext } from "./reducer/cartContext";
+import  CartContext  from "./reducer/cartContext";
 import Image from "next/image";
 import { useMutation } from "react-query";
 

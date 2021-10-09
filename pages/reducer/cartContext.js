@@ -1,9 +1,10 @@
 import { createContext, useReducer } from "react";
-import { actions, cartReducer, initCart } from "./cartReducer";
+import { actions, initCart } from "./cartReducer";
+import cartReducer from "./cartReducer";
 
 export const CartContext = createContext();
 
-export const Provider = ({ children }) => {
+const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initCart);
 
   const value = {
@@ -23,3 +24,5 @@ export const Provider = ({ children }) => {
   };
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
+
+export default Provider

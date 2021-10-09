@@ -11,7 +11,7 @@ export const actions = {
   MINUS_AMOUNT: "MINUS_AMOUNT",
 };
 
-export const cartReducer = (state, action) => {
+const cartReducer = (state, action) => {
   switch (action.type) {
     case actions.ADD_PRODUCT:
       if (
@@ -54,3 +54,4 @@ export const cartReducer = (state, action) => {
       return state;
   }
 };
+export default cartReducer

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const ProductItem = ({name, price, discount, photos, productId}) => {
+const ProductItem = ({name, price, discount, photos, productId}) => {
   return (
     <div className=" bg-white mx-4 flex flex-col justify-center my-2">
       <div className="w-full text-center ">
@@ -31,3 +31,5 @@ export const ProductItem = ({name, price, discount, photos, productId}) => {
     </div>
   );
 };
+
+export default ProductItem

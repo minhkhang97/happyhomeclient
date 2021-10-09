@@ -1,5 +1,5 @@
 //uu diem
-export const Advantages = () => {
+const Advantages = () => {
   return (
     <div className="bg-white py-6">
       <div className="w-10/12 m-auto">
@@ -43,3 +43,4 @@ export const Advantages = () => {
     </div>
   );
 };
+export default Advantages;

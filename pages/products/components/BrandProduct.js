@@ -1,7 +1,7 @@
-import { ProductItem2 } from "./ProductItem2";
+import ProductItem2 from "./ProductItem2";
 import Link from "next/link";
 
-export const BrandProduct = ({ id, name, describe, products }) => {
+const BrandProduct = ({ id, name, describe, products }) => {
   return (
     <div className="">
       <div className="mb-6">
@@ -26,3 +26,5 @@ export const BrandProduct = ({ id, name, describe, products }) => {
     </div>
   );
 };
+
+export default BrandProduct;

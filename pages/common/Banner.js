@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Slider from "react-slick";
-import { Nav } from "./Nav";
+import  Nav from "./Nav";
 
 const setting = {
   arrows: false,
@@ -13,7 +13,7 @@ const setting = {
   autoplay: true,
 };
 
-export const Banner = () => {
+const Banner = () => {
   return (
     <div className="relative">
       <div className="absolute top-0 w-full z-20">
@@ -65,3 +65,5 @@ export const Banner = () => {
     </div>
   );
 };
+
+export default Banner;

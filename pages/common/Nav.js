@@ -28,7 +28,7 @@ const menu = [
   },
 ];
 
-export const Nav = ({logoColor}) => {
+const Nav = ({logoColor}) => {
   const [isActive, setActive] = useState(false);
   return (
     <div className="relative sm:static">
@@ -129,3 +129,5 @@ export const Nav = ({logoColor}) => {
     </div>
   );
 };
+
+export default Nav;
