@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import CartContext from "./reducer/cartContext";
+import {CartContext} from "./reducer/cartContext";
 import  Nav  from "./common/Nav";
 import  Footer  from "./common/Footer";
 import Image from "next/image";

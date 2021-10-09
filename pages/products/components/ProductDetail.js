@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Image from "next/image";
 import { useState } from "react";
-import CartContext from "../../reducer/cartContext";
+import {CartContext} from "../../reducer/cartContext";
 import Slider from "react-slick";
 import Link from "next/link";
 

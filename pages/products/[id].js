@@ -1,11 +1,10 @@
-import  Nav  from "../common/Nav";
-import  Footer from "../common/Footer";
+import Nav from "../common/Nav";
+import Footer from "../common/Footer";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
-import  ProductDetail  from "./components/ProductDetail";
-import ProductItem2  from "./components/ProductItem2";
-import { useEffect, useState } from "react";
+import ProductDetail from "./components/ProductDetail";
+import ProductItem2 from "./components/ProductItem2";
 
 const limit = 4;
 
@@ -27,8 +26,6 @@ const Product = () => {
   const router = useRouter();
   const { id, categoryId } = router.query;
 
-  console.log(categoryId);
-
   const { status, data } = useQuery(["product", id], ({ queryKey }) =>
     fetchProduct(queryKey[1])
   );
@@ -38,7 +35,6 @@ const Product = () => {
     ({ queryKey }) => fetchProductsByCategory(queryKey[1])
   );
 
-  console.log(productsByCategory);
 
   if (status === "loading" || productsByCategory.status === "loading")
     return <p>loading</p>;
