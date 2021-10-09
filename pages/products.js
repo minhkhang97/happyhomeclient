@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import  ProductItem2 from "./products/components/ProductItem2";
-import  Nav  from "./common/Nav";
-import  Footer  from "./common/Footer";
+import  ProductItem2 from "../components/ProductItem2";
+import  Nav  from "../common/Nav";
+import  Footer  from "../common/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";

@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
-import  Footer  from "./common/Footer";
-import  Header  from "./common/Hedear";
+import  Footer  from "../common/Footer";
+import  Header  from "../common/Hedear";
 import axios from "axios";
 import  Trend  from "./products/Trend";
 import  ListProduct  from "./products/ListProduct";
-import Contact from "./common/Contact";
+import Contact from "../common/Contact";
 
 const fetchHomePage = async () => {
   const { data } = await axios.get(

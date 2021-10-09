@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Slider from "react-slick";
-import ProductItem2 from "./components/ProductItem2";
+import ProductItem2 from "../../components/ProductItem2";
 
 const rem = ["rèm cồng vồng", "rèm vải", "rèm cuốn", "rèm gỗ", "rèm voan"];
 

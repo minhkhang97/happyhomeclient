@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
-import Footer from "../common/Footer";
-import Nav from "../common/Nav";
+import Footer from "../../common/Footer";
+import Nav from "../../common/Nav";
 import axios from "axios";
-import BrandProduct from "../products/components/BrandProduct";
+import BrandProduct from "../../components/BrandProduct";
 import Link from "next/link";
 
 const fetchCategories = async () => {

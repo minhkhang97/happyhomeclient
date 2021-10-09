@@ -1,10 +1,10 @@
-import Nav from "../common/Nav";
-import Footer from "../common/Footer";
+import Nav from "../../common/Nav";
+import Footer from "../../common/Footer";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
-import ProductDetail from "./components/ProductDetail";
-import ProductItem2 from "./components/ProductItem2";
+import ProductDetail from "../../components/ProductDetail";
+import ProductItem2 from "../../components/ProductItem2";
 
 const limit = 4;
 
