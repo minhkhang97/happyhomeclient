@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
 import Slider from "react-slick";
 import Nav  from "./Nav";
 
@@ -42,7 +41,6 @@ const setting = {
 };
 
 const Header = () => {
-  const [isActive, setActive] = useState(false);
   return (
     <div className="relative">
       <div className="absolute z-20 w-full h-full text-gray-200">
