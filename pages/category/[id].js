@@ -92,7 +92,7 @@ const Category = () => {
     return (
       <div>
         <Nav />
-        <div className="w-4/5 m-auto py-6">
+        <div className="w-10/12 m-auto py-6">
           <p className="my-4 text-sm font-light text-gray-800 uppercase">
             <Link href="">Trang chủ</Link>
             <i class="fas fa-chevron-right text-xs mx-1"></i>
