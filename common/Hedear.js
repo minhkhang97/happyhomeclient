@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import Slider from "react-slick";
-import Nav  from "./Nav";
+import Nav from "./Nav";
+import { useState, useRef, useEffect } from "react";
 
 const menu = [
   {
@@ -41,11 +42,30 @@ const setting = {
 };
 
 const Header = () => {
+  const [isSticky, setSticky] = useState(false);
+  const ref = useRef(null);
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    offset > 200 ? setSticky(true) : setSticky(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll);
+    };
+  }, []);
   return (
     <div className="relative">
       <div className="absolute z-20 w-full h-full text-gray-200">
-        <Nav logoColor={"text-white"}/>
-        <div className="w-10/12 m-auto h-80">
+        <div
+          className={isSticky ? "fixed w-full bg-white text-black shadow-md" : "static"}
+          ref={ref}
+        >
+          <Nav logoColor={"text-white"} />
+        </div>
+        <div className="w-10/12 m-auto h-96">
           <div className="md:w-1/2 h-full justify-center flex flex-col text-center md:text-left">
             <h2 className="uppercase text=sm md:text-3xl font-black tracking-wider cursor-pointer">
               Lorem Ipsum is simply dummy text
@@ -77,6 +97,5 @@ const Header = () => {
       </div>
     </div>
   );
-
 };
 export default Header;
