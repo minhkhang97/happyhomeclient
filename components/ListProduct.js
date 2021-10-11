@@ -39,8 +39,31 @@ const settings2 = {
   dots: false,
   arrows: false,
   infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 3,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2,
+      },
+    },
+  ],
 };
 
 const ListProduct = ({ data }) => {
@@ -62,7 +85,9 @@ const ListProduct = ({ data }) => {
                 <p
                   className="py-1 cursor-pointer font-medium text-gray-800 hover:text-black"
                   onClick={() => {
-                    let temp = data.filter(el => el.category.id === category.id)[0];
+                    let temp = data.filter(
+                      (el) => el.category.id === category.id
+                    )[0];
                     setProductsCurr(temp);
                     console.log(temp);
                   }}
@@ -79,15 +104,17 @@ const ListProduct = ({ data }) => {
       <div className="">
         <Slider {...settings2}>
           {productsCurr.products.map((product, index) => (
-            <ProductItem2
-              key={index}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              discount={product.discount}
-              photos={product.photos}
-              categoryId={[productsCurr.category.id]}
-            />
+            <div className="">
+              <ProductItem2
+                key={index}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                discount={product.discount}
+                photos={product.photos}
+                categoryId={[productsCurr.category.id]}
+              />
+            </div>
           ))}
         </Slider>
       </div>
@@ -95,4 +122,4 @@ const ListProduct = ({ data }) => {
   );
 };
 
-export default ListProduct
+export default ListProduct;

@@ -5,7 +5,7 @@ const ProductItem2 = ({ id, name, price, discount, photos, categoryId }) => {
   const externaImageLoader = ({ url }) =>
     `https://rocky-springs-26824.herokuapp.com${url}`;
   return (
-    <div className="h-full flex flex-col">
+    <div className={"h-full flex flex-col"}>
       <div className="cursor-pointer relative h-60 group">
         <Image src={externaImageLoader(photos[1])} layout="fill" />
         <Link href={"/products/" + id + "?categoryId=" + categoryId}>
