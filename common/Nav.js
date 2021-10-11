@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const menu = [
   {
@@ -28,10 +28,29 @@ const menu = [
   },
 ];
 
-const Nav = ({logoColor}) => {
+const Nav = ({ logoColor }) => {
   const [isActive, setActive] = useState(false);
+  const [isSticky, setSticky] = useState(false);
+  const ref = useRef(null);
+  const handleScroll = () => {
+    const offset = window.scrollY;
+    offset > 200 ? setSticky(true) : setSticky(false);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", () => handleScroll);
+    };
+  }, []);
   return (
-    <div className="relative sm:static">
+    <div
+      className={
+        isSticky ? "fixed w-full bg-white text-black shadow-md z-40" : "static"
+      }
+      ref={ref}
+    >
       {/* cho man hinh to */}
       <div className="hidden md:flex w-10/12 m-auto md:py-4 lg:md-6 uppercase items-center">
         <div className="w-4/12 ">
@@ -101,14 +120,10 @@ const Nav = ({logoColor}) => {
                   </p>
                   <ul className="px-4 pt-2 text-sm">
                     <li className="hover:text-red-700">
-                      <Link href="/category/1?page=1">
-                        rèm cầu vồng
-                      </Link>
+                      <Link href="/category/1?page=1">rèm cầu vồng</Link>
                     </li>
                     <li className="hover:text-red-700">
-                      <Link href="/category/2?page=1">
-                        rèm vải
-                      </Link>
+                      <Link href="/category/2?page=1">rèm vải</Link>
                     </li>
                   </ul>
                 </li>

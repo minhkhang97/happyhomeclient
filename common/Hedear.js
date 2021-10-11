@@ -59,12 +59,13 @@ const Header = () => {
   return (
     <div className="relative">
       <div className="absolute z-20 w-full h-full text-gray-200">
-        <div
+      <Nav logoColor={"text-white"} />
+        {/* <div
           className={isSticky ? "fixed w-full bg-white text-black shadow-md" : "static"}
           ref={ref}
         >
-          <Nav logoColor={"text-white"} />
-        </div>
+          
+        </div> */}
         <div className="w-10/12 m-auto h-96">
           <div className="md:w-1/2 h-full justify-center flex flex-col text-center md:text-left">
             <h2 className="uppercase text=sm md:text-3xl font-black tracking-wider cursor-pointer">
