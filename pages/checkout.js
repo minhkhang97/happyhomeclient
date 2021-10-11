@@ -1,8 +1,8 @@
-import  Nav  from "../common/Nav";
-import  Footer  from "../common/Footer";
+import Nav from "../common/Nav";
+import Footer from "../common/Footer";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import  {CartContext}  from "../reducer/cartContext";
+import { CartContext } from "../reducer/cartContext";
 import Image from "next/image";
 import { useMutation } from "react-query";
 
@@ -53,6 +53,12 @@ const CheckOut = () => {
   const [districtCurr, setDistrictCurr] = useState(1);
   const [wardCurr, setWardCurr] = useState(1);
   const [address, setAddress] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [errName, setErrName] = useState("");
+  const [errPhone, setErrPhone] = useState("");
+  const [errAddress, setErrAddress] = useState("");
 
   const { cart } = useContext(CartContext);
 
@@ -93,8 +99,8 @@ const CheckOut = () => {
       {mutation.isLoading && <p>dang dat hang</p>}
       {mutation.isSuccess && <p>dat hang thanh cong</p>}
       <div className="w-10/12 m-auto">
-        <div className="flex flex-col sm:flex-row">
-          <div className="sm:w-4/6">
+        <div className="flex flex-col md:flex-row">
+          <div className="md:w-4/6 md:mr-4">
             <p className="uppercase font-medium text-xl text-gray-800">
               Thông tin giao hàng
             </p>
@@ -104,23 +110,40 @@ const CheckOut = () => {
                 e.preventDefault();
               }}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5">
-                <label className="">
-                  <p className="mb-1 uppercase font-light">Họ và tên</p>
-                  <input
-                    type="text"
-                    className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
-                  />
-                </label>
-                <label className="">
-                  <p className="mb-1 uppercase font-light">Số điện thoại</p>
-                  <input
-                    type="text"
-                    className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
-                  />
-                </label>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5">
+              <label className="">
+                <p className="mb-1 uppercase font-light">Họ và tên</p>
+                <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={() => !name && setErrName("vui lòng điền tên")}
+                  onFocus={() => setErrName("")}
+                  type="text"
+                  className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
+                />
+                {errName && (
+                  <span className="text-red-700 text-sm">{errName}</span>
+                )}
+              </label>
+              <label className="">
+                <p className="mb-1 uppercase font-light">Số điện thoại</p>
+                <input
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  onBlur={(e) => {
+                    if (!phone) setErrPhone("vui lòng nhập số điện thoại");
+                    const regex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+                    if (!regex.test(phone))
+                      setErrPhone("số điện thoại không chính xác");
+                  }}
+                  onFocus={() => setErrPhone("")}
+                  type="text"
+                  className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
+                />
+                {errPhone && (
+                  <span className="text-red-700 text-sm">{errPhone}</span>
+                )}
+              </label>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 <label className="">
                   <p className="mb-1 uppercase font-light">Thành phố/Tỉnh</p>
                   <select
@@ -150,8 +173,6 @@ const CheckOut = () => {
                     ))}
                   </select>
                 </label>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 sm:gap-5">
                 <label className="">
                   <p className="mb-1 uppercase font-light">Xã phường</p>
                   <select
@@ -165,17 +186,24 @@ const CheckOut = () => {
                     ))}
                   </select>
                 </label>
-                <label className="">
-                  <p className="mb-1 uppercase font-light">Địa chỉ</p>
-                  <input
-                    type="text"
-                    className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
-                  />
-                </label>
               </div>
+              <label className="">
+                <p className="mb-1 uppercase font-light">Địa chỉ</p>
+                <input
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  onBlur={() => setErrAddress("vui lòng điền địa chỉ")}
+                  onFocus={() => setErrAddress("")}
+                  type="text"
+                  className="w-full outline-none py-2 px-4 border border-solid border-gray-900"
+                />
+                {errAddress && (
+                  <span className="text-red-700 text-sm">{errAddress}</span>
+                )}
+              </label>
             </form>
           </div>
-          <div className="sm:w-2/6">
+          <div className="md:w-2/6 md:ml-4">
             <p className="uppercase font-semibold text-xl text-gray-700 my-2">
               chi tiết đơn hàng
             </p>
@@ -201,15 +229,20 @@ const CheckOut = () => {
               </div>
               <p
                 className="uppercase font-light cursor-pointer bg-yellow-700 text-white text-center tracking-wide py-2"
-                onClick={() =>
-                  mutation.mutate({
-                    province: provinceCurr,
-                    district: districtCurr,
-                    ward: wardCurr,
-                    cart,
-                    describe: describeCart(),
-                  })
-                }
+                onClick={() => {
+                  if (!name) setErrName("vui lòng nhập tên");
+                  if (!phone) setErrPhone("vui lòng nhập số điện thoại");
+                  if (!address) setErrAddress("vui lòng điền địa chỉ");
+                  if (name && address && phone) {
+                    mutation.mutate({
+                      province: provinceCurr,
+                      district: districtCurr,
+                      ward: wardCurr,
+                      cart,
+                      describe: describeCart(),
+                    });
+                  }
+                }}
               >
                 đặt hàng
               </p>

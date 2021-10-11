@@ -33,7 +33,7 @@ const Nav = ({logoColor}) => {
   return (
     <div className="relative sm:static">
       {/* cho man hinh to */}
-      <div className="hidden sm:flex w-10/12 m-auto md:py-4 lg:md-6 uppercase items-center">
+      <div className="hidden md:flex w-10/12 m-auto md:py-4 lg:md-6 uppercase items-center">
         <div className="w-4/12 ">
           <h1 className={"uppercase text-sm sm:text-2xl font-bold" + logoColor}>
             Happy Home
@@ -59,7 +59,7 @@ const Nav = ({logoColor}) => {
       </div>
 
       {/* cho dien thoai */}
-      <div className="flex sm:hidden w-10/12 m-auto py-4 items-center">
+      <div className="flex md:hidden w-10/12 m-auto py-4 items-center">
         <div className="w-1/12 text-left" onClick={() => setActive(!isActive)}>
           <i className="fas fa-bars"></i>
         </div>

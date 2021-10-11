@@ -45,18 +45,18 @@ const Header = () => {
     <div className="relative">
       <div className="absolute z-20 w-full h-full text-gray-200">
         <Nav logoColor={"text-white"}/>
-        <div className="w-10/12 m-auto ">
-          <div className="flex flex-col text-center justify-center items-center">
-            <h2 className="uppercase text-sm font-semibold cursor-pointer">
+        <div className="w-10/12 m-auto h-80">
+          <div className="md:w-1/2 h-full justify-center flex flex-col text-center md:text-left">
+            <h2 className="uppercase text=sm md:text-3xl font-black tracking-wider cursor-pointer">
               Lorem Ipsum is simply dummy text
             </h2>
-            <p className="pt-2 pb-4 cursor-pointer">
+            <p className="mb-4 mt-2 pt-2 pb-4 cursor-pointer text-lg">
               There are many variations of passages of Lorem Ipsum available,
               but the majority have suffered alteration in some form, by
               injected humour
             </p>
             <div>
-              <button className="text-xs uppercase bg-red-500 text-gray-50 font-bold py-2 px-4 rounded-sm shadow-md">
+              <button className="text-md uppercase bg-red-500 text-gray-50 font-bold py-2 px-4 rounded-sm shadow-md">
                 <Link href="">liên hệ ngay</Link>
               </button>
             </div>
@@ -65,11 +65,11 @@ const Header = () => {
       </div>
       <div className="relative">
         <Slider {...setting}>
-          <div className="w-full h-80 relative">
+          <div className="w-full h-[30rem] relative">
             <Image src="/banner1.png" layout="fill" />
           </div>
 
-          <div className="w-full h-80 relative">
+          <div className="w-full h-[30rem] relative">
             <Image src="/banner.png" layout="fill" />
           </div>
         </Slider>

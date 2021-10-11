@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
-import  Footer  from "../common/Footer";
-import  Header  from "../common/Hedear";
+import Footer from "../common/Footer";
+import Header from "../common/Hedear";
 import axios from "axios";
-import  Trend  from "../components/Trend";
-import  ListProduct  from "../components/ListProduct";
+import Trend from "../components/Trend";
+import ListProduct from "../components/ListProduct";
 import Contact from "../common/Contact";
+import Head from "next/head";
 
 const fetchHomePage = async () => {
   const { data } = await axios.get(
@@ -19,6 +20,10 @@ export default function Home() {
   if (result.isSuccess)
     return (
       <div className="">
+        <Head>
+          <title>Happy Home</title>
+          <meta property="og:title" content="Happy Home" key="title" />
+        </Head>
         <Header />
         <div>
           {result.data.bestseller.map((el, index) => (
@@ -26,7 +31,7 @@ export default function Home() {
           ))}
         </div>
         <ListProduct data={result.data.featureproduct} />
-        <Contact/>
+        <Contact />
         <Footer />
       </div>
     );

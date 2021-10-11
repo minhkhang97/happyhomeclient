@@ -40,12 +40,13 @@ const Banner = () => {
         </div>
         <div className="">
           <Slider {...setting}>
+            <div className="relative w-full h-96">
             <Image
               src="/banner1.png"
-              objectFit="cover"
-              height={900}
-              width={1440}
+              objectFit="fill"
             />
+            </div>
+            
             <Image
               src="/banner1.png"
               objectFit="cover"
