@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const limit = 4;
+const limit = 8;
 
 const fetchProducts = async (page) => {
   const res = await axios.get(

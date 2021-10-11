@@ -47,7 +47,7 @@ const Nav = ({ logoColor }) => {
   return (
     <div
       className={
-        isSticky ? "fixed w-full bg-white text-black shadow-md z-40" : "static"
+        isSticky ? "fixed w-full top-0 bg-white text-black shadow-md z-40" : "static"
       }
       ref={ref}
     >
