@@ -6,6 +6,7 @@ import Nav  from "../../common/Nav";
 import Footer from "../../common/Footer";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import Loading from "../../common/Loading";
 
 const limit = 4;
 
@@ -82,7 +83,7 @@ const Category = () => {
     result[2].status === "loading" ||
     result[3].status === "loading"
   )
-    return <p>loading</p>;
+    return <Loading/>
   if (
     result[0].status === "success" &&
     result[1].status === "success" &&

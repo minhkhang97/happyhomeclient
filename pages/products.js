@@ -6,6 +6,7 @@ import Footer from "../common/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import Loading from "../common/Loading";
 
 const limit = 8;
 
@@ -55,7 +56,7 @@ const Products = () => {
   }, [amountProduct.data]);
 
   if (products.isLoading || categories.isLoading || amountProduct.isLoading)
-    return <p>loading</p>;
+    return <Loading/>;
   if (products.isSuccess && categories.isSuccess && amountProduct.isSuccess)
     return (
       <div>

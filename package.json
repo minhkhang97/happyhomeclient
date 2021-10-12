@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.4.1",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@zeit/next-css": "^1.0.1",
@@ -18,6 +19,7 @@
     "react-query": "^3.24.5",
     "react-responsive-carousel": "^3.2.21",
     "react-slick": "^0.28.1",
+    "react-spinners": "^0.11.0",
     "slick-carousel": "^1.8.1",
     "url-loader": "^4.1.1"
   },

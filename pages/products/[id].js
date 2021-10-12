@@ -5,6 +5,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import ProductDetail from "../../components/ProductDetail";
 import ProductItem2 from "../../components/ProductItem2";
+import Loading from "../../common/Loading";
 
 const limit = 4;
 
@@ -44,7 +45,7 @@ const Product = () => {
 
 
   if (status === "loading" || productsByCategory.status === "loading" || categories.isLoading)
-    return <p>loading</p>;
+    return <Loading/>
   if (status === "success" && productsByCategory.status === "success" && categories.isSuccess)
     return (
       <div>
