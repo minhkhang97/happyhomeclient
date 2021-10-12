@@ -35,13 +35,20 @@ const Product = () => {
     ({ queryKey }) => fetchProductsByCategory(queryKey[1])
   );
 
+  const categories = useQuery("categories", async () => {
+    const { data } = await axios.get(
+      "https://rocky-springs-26824.herokuapp.com/categories"
+    );
+    return data;
+  });
 
-  if (status === "loading" || productsByCategory.status === "loading")
+
+  if (status === "loading" || productsByCategory.status === "loading" || categories.isLoading)
     return <p>loading</p>;
-  if (status === "success" && productsByCategory.status === "success")
+  if (status === "success" && productsByCategory.status === "success" && categories.isSuccess)
     return (
       <div>
-        <Nav />
+        <Nav categories={categories.data}/>
         <div className="w-10/12 m-auto">
           <ProductDetail product={data} />
           <div>

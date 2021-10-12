@@ -91,7 +91,7 @@ const Category = () => {
   )
     return (
       <div>
-        <Nav />
+        <Nav categories={result[1].data}/>
         <div className="w-10/12 m-auto py-6">
           <p className="my-4 text-sm font-light text-gray-800 uppercase">
             <Link href="">Trang chủ</Link>

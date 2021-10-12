@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import  ProductItem2 from "../components/ProductItem2";
-import  Nav  from "../common/Nav";
-import  Footer  from "../common/Footer";
+import ProductItem2 from "../components/ProductItem2";
+import Nav from "../common/Nav";
+import Footer from "../common/Footer";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -19,10 +19,10 @@ const fetchProducts = async (page) => {
 };
 
 const fetchCategories = async () => {
-  const res = await axios.get(
+  const { data } = await axios.get(
     `https://rocky-springs-26824.herokuapp.com/categories`
   );
-  return res;
+  return data;
 };
 
 const fetchCountProduct = async () => {
@@ -31,8 +31,6 @@ const fetchCountProduct = async () => {
   );
   return data;
 };
-
-
 
 const Products = () => {
   const router = useRouter();
@@ -56,20 +54,12 @@ const Products = () => {
     setPagination([...temp]);
   }, [amountProduct.data]);
 
-  if (
-    products.status === "loading" ||
-    categories.status === "loading" ||
-    amountProduct.status === "loading"
-  )
+  if (products.isLoading || categories.isLoading || amountProduct.isLoading)
     return <p>loading</p>;
-  if (
-    products.status === "success" &&
-    categories.status === "success" &&
-    amountProduct.status == "success"
-  )
+  if (products.isSuccess && categories.isSuccess && amountProduct.isSuccess)
     return (
       <div>
-        <Nav />
+        <Nav categories={categories.data}/>
         <div className="w-10/12 m-auto">
           <p className="my-8 text-sm font-light text-gray-800 uppercase">
             <Link href="/">Trang chủ</Link>
@@ -79,8 +69,8 @@ const Products = () => {
           <div className="flex flex-col sm:flex-row">
             <div className="sm:w-1/5">
               <ul className="flex flex-row sm:flex-col mb-4 sm:mb-0">
-                {categories.data.data.map((category, index) => (
-                  <li className="pr-4 uppercase tracking-wide py-1">
+                {categories.data.map((category, index) => (
+                  <li className="pr-4 uppercase tracking-wide py-1" key={index}>
                     <Link href={"/category/" + category.id + "?page=1"}>
                       {category.name}
                     </Link>

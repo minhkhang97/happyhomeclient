@@ -39,6 +39,9 @@ const postOrder = async (order) => {
       district: districtData.name,
       ward: wardData.name,
       describe: order.describe,
+      phone: order.phone,
+      address: order.address,
+      name: order.name
     }
   );
   return res;
@@ -240,6 +243,9 @@ const CheckOut = () => {
                       ward: wardCurr,
                       cart,
                       describe: describeCart(),
+                      name,
+                      phone,
+                      address
                     });
                   }
                 }}

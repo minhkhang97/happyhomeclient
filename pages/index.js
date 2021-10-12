@@ -16,15 +16,21 @@ const fetchHomePage = async () => {
 
 export default function Home() {
   const result = useQuery("homepage", fetchHomePage);
-  if (result.isLoading) return <div>loading</div>;
-  if (result.isSuccess)
+  const categories = useQuery("categories", async () => {
+      const { data } = await axios.get(
+        "https://rocky-springs-26824.herokuapp.com/categories"
+      );
+      return data;
+    });
+  if (result.isLoading || categories.isLoading) return <div>loading</div>;
+  if (result.isSuccess && categories.isSuccess)
     return (
       <div className="">
         <Head>
           <title>Happy Home</title>
           <meta property="og:title" content="Happy Home" key="title" />
         </Head>
-        <Header />
+        <Header categories={categories.data}/>
         <div>
           {result.data.bestseller.map((el, index) => (
             <Trend key={index} title={el.title} products={el.products} />

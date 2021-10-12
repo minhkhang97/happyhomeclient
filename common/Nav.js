@@ -1,5 +1,7 @@
+import axios from "axios";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { useQuery } from "react-query";
 
 const menu = [
   {
@@ -28,7 +30,7 @@ const menu = [
   },
 ];
 
-const Nav = ({ logoColor }) => {
+const Nav = ({ logoColor, categories }) => {
   const [isActive, setActive] = useState(false);
   const [isSticky, setSticky] = useState(false);
   const ref = useRef(null);
@@ -44,10 +46,21 @@ const Nav = ({ logoColor }) => {
       window.removeEventListener("scroll", () => handleScroll);
     };
   }, []);
+
+  // const categories = useQuery("categories", async () => {
+  //   const { data } = await axios.get(
+  //     "https://rocky-springs-26824.herokuapp.com/categories"
+  //   );
+  //   return data;
+  // });
+  // if (categories.isLoading) return <div>loading...</div>;
+  // if (categories.isSuccess) console.log(categories.data);
   return (
     <div
       className={
-        isSticky ? "fixed w-full top-0 bg-white text-black shadow-md z-40" : "static"
+        isSticky
+          ? "fixed w-full top-0 bg-white text-black shadow-md z-40"
+          : "static"
       }
       ref={ref}
     >
@@ -63,7 +76,6 @@ const Nav = ({ logoColor }) => {
           <ul className="flex justify-end font-medium sm:text-xs md:text-xs lg:text-sm">
             {menu.map((el, index) => (
               <li key={index} className="md:px-1 lg:px-4">
-                <i className={el.icon}></i>
                 <Link href={el.herf}>{el.name}</Link>
               </li>
             ))}
@@ -119,12 +131,13 @@ const Nav = ({ logoColor }) => {
                     </Link>
                   </p>
                   <ul className="px-4 pt-2 text-sm">
-                    <li className="hover:text-red-700">
-                      <Link href="/category/1?page=1">rèm cầu vồng</Link>
-                    </li>
-                    <li className="hover:text-red-700">
-                      <Link href="/category/2?page=1">rèm vải</Link>
-                    </li>
+                    {categories.map((el, index) => (
+                      <li className="hover:text-red-700" key={index}>
+                        <Link href={"/category/" + el.id + "?page=1"}>
+                          {el.name}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </li>
                 <li className="pb-4 hover:text-red-700 text-black">

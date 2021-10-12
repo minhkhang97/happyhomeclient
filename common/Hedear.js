@@ -41,7 +41,7 @@ const setting = {
   autoplay: true,
 };
 
-const Header = () => {
+const Header = ({categories}) => {
   const [isSticky, setSticky] = useState(false);
   const ref = useRef(null);
   const handleScroll = () => {
@@ -59,7 +59,7 @@ const Header = () => {
   return (
     <div className="relative">
       <div className="absolute z-20 w-full h-full text-gray-200">
-      <Nav logoColor={"text-white"} />
+      <Nav logoColor={"text-white"} categories={categories} />
         {/* <div
           className={isSticky ? "fixed w-full bg-white text-black shadow-md" : "static"}
           ref={ref}
