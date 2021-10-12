@@ -1,13 +1,21 @@
 import { useRouter } from "next/router";
 import { useQueries, useQuery } from "react-query";
 import axios from "axios";
-import  ProductItem2  from "../../components/ProductItem2";
-import Nav  from "../../common/Nav";
+import ProductItem2 from "../../components/ProductItem2";
+import Nav from "../../common/Nav";
 import Footer from "../../common/Footer";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Loading from "../../common/Loading";
+import Slider from "react-slick";
 
+const settings = {
+  dots: false,
+  arrows: false,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+};
 const limit = 4;
 
 const fetchCategory = async (id) => {
@@ -83,7 +91,7 @@ const Category = () => {
     result[2].status === "loading" ||
     result[3].status === "loading"
   )
-    return <Loading/>
+    return <Loading />;
   if (
     result[0].status === "success" &&
     result[1].status === "success" &&
@@ -92,10 +100,10 @@ const Category = () => {
   )
     return (
       <div>
-        <Nav categories={result[1].data}/>
+        <Nav categories={result[1].data} />
         <div className="w-10/12 m-auto py-6">
           <p className="my-4 text-sm font-light text-gray-800 uppercase">
-            <Link href="">Trang chủ</Link>
+            <Link href="/">Trang chủ</Link>
             <i class="fas fa-chevron-right text-xs mx-1"></i>
             <Link href={"/category/" + id + "?page=1"}>
               {result[3].data.name}
@@ -110,7 +118,7 @@ const Category = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row">
-            <div className="sm:w-1/5">
+            <div className="hidden md:block md:w-1/5">
               <ul className="flex flex-row sm:flex-col">
                 {result[1].data.map((category, index) => (
                   <li
@@ -123,6 +131,21 @@ const Category = () => {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="md:hidden mb-4">
+              <Slider {...settings}>
+                {result[1].data.map((category, index) => (
+                  <div
+                    className="pr-4 text-center text-xs sm:text-sm uppercase tracking-wide py-1"
+                    key={index}
+                  >
+                    <Link href={"/category/" + category.id + "?page=1"}>
+                      {category.name}
+                    </Link>
+                  </div>
+                ))}
+              </Slider>
             </div>
             <div className="sm:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
               {result[0].data.map((el, index) => (

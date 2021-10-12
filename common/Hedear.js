@@ -58,7 +58,7 @@ const Header = ({categories}) => {
   }, []);
   return (
     <div className="relative">
-      <div className="absolute z-20 w-full h-full text-gray-200">
+      <div className="absolute z-20 w-full h-full text-white">
       <Nav logoColor={"text-white"} categories={categories} />
         {/* <div
           className={isSticky ? "fixed w-full bg-white text-black shadow-md" : "static"}
@@ -68,8 +68,8 @@ const Header = ({categories}) => {
         </div> */}
         <div className="w-10/12 m-auto h-96">
           <div className="md:w-1/2 h-full justify-center flex flex-col text-center md:text-left">
-            <h2 className="uppercase text=sm md:text-3xl font-black tracking-wider cursor-pointer">
-              Lorem Ipsum is simply dummy text
+            <h2 className="uppercase text=sm md:text-3xl font-black tracking-wider cursor-pointer text-[#ffb300]">
+            rèm nội thất nhập khẩu
             </h2>
             <p className="mb-4 mt-2 pt-2 pb-4 cursor-pointer text-lg">
               There are many variations of passages of Lorem Ipsum available,
@@ -77,7 +77,7 @@ const Header = ({categories}) => {
               injected humour
             </p>
             <div>
-              <button className="text-md uppercase bg-red-500 text-gray-50 font-bold py-2 px-4 rounded-sm shadow-md">
+              <button className="text-md uppercase bg-[#ffb300] text-[#1a237e] font-bold py-2 px-4 rounded-sm shadow-md">
                 <Link href="">liên hệ ngay</Link>
               </button>
             </div>
@@ -94,7 +94,7 @@ const Header = ({categories}) => {
             <Image src="/banner.png" layout="fill" />
           </div>
         </Slider>
-        <div className="top-0 absolute z-10 bg-gradient-to-b from-gray-900 to-gray-900 w-full h-full opacity-70"></div>
+        <div className="top-0 absolute z-10 bg-gradient-to-b from-gray-900 to-gray-900 w-full h-full opacity-50"></div>
       </div>
     </div>
   );

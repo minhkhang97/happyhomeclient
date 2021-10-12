@@ -67,9 +67,13 @@ const Nav = ({ logoColor, categories }) => {
       {/* cho man hinh to */}
       <div className="hidden md:flex w-10/12 m-auto md:py-4 lg:md-6 uppercase items-center">
         <div className="w-4/12 ">
-          <h1 className={"uppercase text-sm sm:text-2xl font-bold" + logoColor}>
-            Happy Home
-          </h1>
+          <Link href="/">
+            <h1
+              className={"cursor-pointer uppercase text-sm sm:text-2xl font-bold" + logoColor}
+            >
+              Happy Home
+            </h1>
+          </Link>
         </div>
         {/* hien thi cho cac thiet bi lon */}
         <div className="w-7/12">

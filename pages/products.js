@@ -7,6 +7,15 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loading from "../common/Loading";
+import Slider from "react-slick";
+
+const settings = {
+  dots: false,
+  arrows: false,
+  infinite: true,
+  slidesToShow: 3,
+  slidesToScroll: 3,
+};
 
 const limit = 8;
 
@@ -56,11 +65,11 @@ const Products = () => {
   }, [amountProduct.data]);
 
   if (products.isLoading || categories.isLoading || amountProduct.isLoading)
-    return <Loading/>;
+    return <Loading />;
   if (products.isSuccess && categories.isSuccess && amountProduct.isSuccess)
     return (
       <div>
-        <Nav categories={categories.data}/>
+        <Nav categories={categories.data} />
         <div className="w-10/12 m-auto">
           <p className="my-8 text-sm font-light text-gray-800 uppercase">
             <Link href="/">Trang chủ</Link>
@@ -68,7 +77,7 @@ const Products = () => {
             <Link href="/products?page=1">sản phẩm</Link>
           </p>
           <div className="flex flex-col sm:flex-row">
-            <div className="sm:w-1/5">
+            <div className="hidden sm:block sm:w-1/5">
               <ul className="flex flex-row sm:flex-col mb-4 sm:mb-0">
                 {categories.data.map((category, index) => (
                   <li className="pr-4 uppercase tracking-wide py-1" key={index}>
@@ -78,6 +87,22 @@ const Products = () => {
                   </li>
                 ))}
               </ul>
+            </div>
+            {/* giao dien cho dien thoai */}
+
+            <div className="md:hidden mb-4">
+              <Slider {...settings}>
+                {categories.data.map((category, index) => (
+                  <div
+                    className="pr-4 text-xs sm:text-sm uppercase tracking-wide py-1"
+                    key={index}
+                  >
+                    <Link href={"/category/" + category.id + "?page=1"}>
+                      {category.name}
+                    </Link>
+                  </div>
+                ))}
+              </Slider>
             </div>
             <div className="sm:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
               {products.data.data.map((product, index) => (
