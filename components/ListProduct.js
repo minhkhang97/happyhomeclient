@@ -75,7 +75,7 @@ const ListProduct = ({ data }) => {
     <div className="w-10/12 m-auto mt-12 mb-8">
       <div className="uppercase font-semibold">
         <div>
-          <h3 className="text-center mb-2">Danh mục</h3>
+          <h3 className="text-center text-gray-900 text-xl font-bold mb-2">Danh mục</h3>
           {/* <p className="w-1/4 h-1 bg-gray-400 m-auto"></p> */}
         </div>
         <div className="my-4">

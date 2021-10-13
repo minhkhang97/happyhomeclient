@@ -42,7 +42,7 @@ const settings = {
 const Trend = ({ title, products }) => {
   return (
     <div className="w-10/12 m-auto my-10">
-      <h2 className="text-center uppercase font-semibold text-gray-900 mb-6">
+      <h2 className="text-center text-xl uppercase font-bold text-gray-900 mb-6">
         {title}
       </h2>
       <Slider {...settings}>

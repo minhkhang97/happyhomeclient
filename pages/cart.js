@@ -1,9 +1,12 @@
 import { useContext } from "react";
-import {CartContext} from "../reducer/cartContext";
-import  Nav  from "../common/Nav";
-import  Footer  from "../common/Footer";
+import { CartContext } from "../reducer/cartContext";
+import Nav from "../common/Nav";
+import Footer from "../common/Footer";
 import Image from "next/image";
 import Link from "next/link";
+import { useQuery } from "react-query";
+import Loading from "../common/Loading";
+import axios from "axios";
 
 const Cart = () => {
   const { cart, removeProduct, plusProduct, minusProduct } =
@@ -15,9 +18,17 @@ const Cart = () => {
     (acc, curr) => curr.price * curr.amount + acc,
     0
   );
+  const categories = useQuery("categories", async () => {
+    const { data } = await axios.get(
+      "https://rocky-springs-26824.herokuapp.com/categories"
+    );
+    return data;
+  });
+  if (categories.isLoading) return <Loading />;
+  if (categories.isSuccess)
   return (
     <div>
-      <Nav />
+      <Nav categories={categories.data} />
       <div className="w-10/12 m-auto">
         <h5 className="uppercase font-medium text-xl">giỏ hàng</h5>
         <div className="flex flex-col sm:flex-row my-6">

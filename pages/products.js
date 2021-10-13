@@ -71,7 +71,7 @@ const Products = () => {
       <div>
         <Nav categories={categories.data} />
         <div className="w-10/12 m-auto">
-          <p className="my-8 text-sm font-light text-gray-800 uppercase">
+          <p className="my-8 text-xs font-light text-gray-800 uppercase">
             <Link href="/">Trang chủ</Link>
             <i class="fas fa-chevron-right text-xs mx-1"></i>
             <Link href="/products?page=1">sản phẩm</Link>
@@ -94,7 +94,7 @@ const Products = () => {
               <Slider {...settings}>
                 {categories.data.map((category, index) => (
                   <div
-                    className="pr-4 text-xs sm:text-sm uppercase tracking-wide py-1"
+                    className="pr-4 text-sm sm:text-sm uppercase tracking-wide py-1"
                     key={index}
                   >
                     <Link href={"/category/" + category.id + "?page=1"}>

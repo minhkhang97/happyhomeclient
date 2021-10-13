@@ -38,7 +38,7 @@ import Link from "next/link";
         <Link href="/products?page=1">{name}</Link>
       </p>
       <div className="flex flex-col sm:flex-row">
-        <div className="w-full sm:w-1/2">
+        <div className="w-full sm:w-1/3">
           <Slider asNavFor={nav2} ref={(c) => setNav1(c)}>
             {photos.map((el, index) => (
               <div key={index} className="relative w-full h-80 shadow-lg">
@@ -63,19 +63,19 @@ import Link from "next/link";
           </Slider>
         </div>
 
-        <div className="text-lg mt-4 w-full sm:w-1/2 sm:pl-8">
-          <h3 className="uppercase font-semibold text-gray-800 text-xl tracking-wider">
+        <div className="text-lg mt-4 w-full sm:w-2/3 sm:pl-20">
+          <h3 className="uppercase font-semibold text-gray-800 text-xl tracking-wide">
             {name}
           </h3>
           <div className="flex flex-row items-center my-3">
-            <p className="text-lg text-red-800">{discount} vnđ</p>
-            <del className="text-xs text-gray-400 px-2">{price} vnđ</del>
+            <p className="text-xl text-red-800">{discount} vnđ</p>
+            <del className="text-sm text-gray-400 px-2">{price} vnđ</del>
           </div>
 
           <div className="py-4">
             <div className="flex">
               <i class="fas fa-sort-down"></i>
-              <p className="uppercase mx-2">Thông tin sản phẩm</p>
+              <p className="uppercase mx-2 mb-2">Thông tin sản phẩm</p>
             </div>
             <div className="text-md text-gray-900 text-sm px-3">
               <div className="flex">
