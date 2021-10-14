@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loading from "../common/Loading";
 import Slider from "react-slick";
+import {fetchCategories, fetchProducts, fetchCountProduct} from '../api/apiHandler';
 
 const settings = {
   dots: false,
@@ -18,29 +19,6 @@ const settings = {
 };
 
 const limit = 8;
-
-const fetchProducts = async (page) => {
-  const res = await axios.get(
-    `https://rocky-springs-26824.herokuapp.com/products?_start=${
-      (page - 1) * limit
-    }&_limit=${limit}`
-  );
-  return res;
-};
-
-const fetchCategories = async () => {
-  const { data } = await axios.get(
-    `https://rocky-springs-26824.herokuapp.com/categories`
-  );
-  return data;
-};
-
-const fetchCountProduct = async () => {
-  const { data } = await axios.get(
-    `https://rocky-springs-26824.herokuapp.com/products/count`
-  );
-  return data;
-};
 
 const Products = () => {
   const router = useRouter();
@@ -63,7 +41,7 @@ const Products = () => {
     }
     setPagination([...temp]);
   }, [amountProduct.data]);
-
+console.log(products);
   if (products.isLoading || categories.isLoading || amountProduct.isLoading)
     return <Loading />;
   if (products.isSuccess && categories.isSuccess && amountProduct.isSuccess)
@@ -105,7 +83,7 @@ const Products = () => {
               </Slider>
             </div>
             <div className="sm:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
-              {products.data.data.map((product, index) => (
+              {products.data.map((product, index) => (
                 <ProductItem2
                   id={product.id}
                   name={product.name}
