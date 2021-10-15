@@ -5,17 +5,10 @@ import ProductItem2 from "../../components/ProductItem2";
 import Nav from "../../common/Nav";
 import Footer from "../../common/Footer";
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import Loading from "../../common/Loading";
-import Slider from "react-slick";
+import Pagination from "../../components/Pagination";
+import ListCategory from "../../components/ListCategory";
 
-const settings = {
-  dots: false,
-  arrows: false,
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-};
 const limit = 4;
 
 const fetchCategory = async (id) => {
@@ -53,10 +46,6 @@ const Category = () => {
   const router = useRouter();
   const { id, page } = router.query;
 
-  const { status, data } = useQuery(["category", id], ({ queryKey }) =>
-    fetchCategory(queryKey[1])
-  );
-
   const result = useQueries([
     {
       queryKey: ["products", id, page],
@@ -72,18 +61,6 @@ const Category = () => {
       queryFn: ({ queryKey }) => fetchCategory(queryKey[1]),
     },
   ]);
-
-  const [pagination, setPagination] = useState([]);
-
-  useEffect(() => {
-    const count = Math.round(result[2].data / limit) + 1;
-    let temp = [];
-    let len = count > 3 ? 3 : count;
-    for (let i = 1; i <= len; i++) {
-      temp = [...temp, i];
-    }
-    setPagination([...temp]);
-  }, [result[2].data]);
 
   if (
     result[0].status === "loading" ||
@@ -118,36 +95,8 @@ const Category = () => {
             </p>
           </div>
           <div className="flex flex-col sm:flex-row">
-            <div className="hidden md:block md:w-1/5">
-              <ul className="flex flex-row sm:flex-col">
-                {result[1].data.map((category, index) => (
-                  <li
-                    className="uppercase tracking-wide mb-4 sm:mb-0 py-1 pr-4"
-                    key={index}
-                  >
-                    <Link href={"/category/" + category.id + "?page=1"}>
-                      {category.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="md:hidden mb-4">
-              <Slider {...settings}>
-                {result[1].data.map((category, index) => (
-                  <div
-                    className="pr-4 text-center text-xs sm:text-sm uppercase tracking-wide py-1"
-                    key={index}
-                  >
-                    <Link href={"/category/" + category.id + "?page=1"}>
-                      {category.name}
-                    </Link>
-                  </div>
-                ))}
-              </Slider>
-            </div>
-            <div className="sm:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
+            <ListCategory categories={result[1].data} />
+            <div className="md:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
               {result[0].data.map((el, index) => (
                 <ProductItem2
                   key={index}
@@ -162,36 +111,7 @@ const Category = () => {
             </div>
           </div>
 
-          {/* phan trang */}
-          <div className="my-6">
-            <ul className="flex justify-center items-center">
-              <li
-                onClick={() => {
-                  if (pagination[0] > 1)
-                    setPagination([...pagination.map((el) => el - 1)]);
-                }}
-              >
-                <i class="fas fa-chevron-left"></i>
-              </li>
-              {pagination.map((el, i) => (
-                <li key={i} className="px-4 py-1 mx-2 bg-gray-200">
-                  <Link href={"/category/" + id + "?page=" + el}>
-                    <a>{el}</a>
-                  </Link>
-                </li>
-              ))}
-              <li
-                onClick={() =>
-                  pagination[pagination.length - 1] <
-                  Math.round(result[2].data / limit) + 1
-                    ? setPagination([...pagination.map((el) => el + 1)])
-                    : null
-                }
-              >
-                <i class="fas fa-chevron-right"></i>
-              </li>
-            </ul>
-          </div>
+          <Pagination amountProduct={result[2].data} />
         </div>
 
         <Footer />

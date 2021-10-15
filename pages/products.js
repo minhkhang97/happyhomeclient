@@ -8,17 +8,14 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Loading from "../common/Loading";
 import Slider from "react-slick";
-import {fetchCategories, fetchProducts, fetchCountProduct} from '../api/apiHandler';
+import {
+  fetchCategories,
+  fetchProducts,
+  fetchCountProduct,
+} from "../api/apiHandler";
+import Pagination from "../components/Pagination";
+import ListCategory from "../components/ListCategory";
 
-const settings = {
-  dots: false,
-  arrows: false,
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 3,
-};
-
-const limit = 8;
 
 const Products = () => {
   const router = useRouter();
@@ -30,18 +27,6 @@ const Products = () => {
 
   const amountProduct = useQuery("amountProduct", fetchCountProduct);
 
-  const [pagination, setPagination] = useState([]);
-
-  useEffect(() => {
-    const count = Math.round(amountProduct.data / limit) + 1;
-    let temp = [];
-    let len = count > 3 ? 3 : count;
-    for (let i = 1; i <= len; i++) {
-      temp = [...temp, i];
-    }
-    setPagination([...temp]);
-  }, [amountProduct.data]);
-console.log(products);
   if (products.isLoading || categories.isLoading || amountProduct.isLoading)
     return <Loading />;
   if (products.isSuccess && categories.isSuccess && amountProduct.isSuccess)
@@ -55,33 +40,7 @@ console.log(products);
             <Link href="/products?page=1">sản phẩm</Link>
           </p>
           <div className="flex flex-col sm:flex-row">
-            <div className="hidden sm:block sm:w-1/5">
-              <ul className="flex flex-row sm:flex-col mb-4 sm:mb-0">
-                {categories.data.map((category, index) => (
-                  <li className="pr-4 uppercase tracking-wide py-1" key={index}>
-                    <Link href={"/category/" + category.id + "?page=1"}>
-                      {category.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* giao dien cho dien thoai */}
-
-            <div className="md:hidden mb-4">
-              <Slider {...settings}>
-                {categories.data.map((category, index) => (
-                  <div
-                    className="pr-4 text-sm sm:text-sm uppercase tracking-wide py-1"
-                    key={index}
-                  >
-                    <Link href={"/category/" + category.id + "?page=1"}>
-                      {category.name}
-                    </Link>
-                  </div>
-                ))}
-              </Slider>
-            </div>
+            <ListCategory categories={categories.data} />
             <div className="sm:w-4/5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6">
               {products.data.map((product, index) => (
                 <ProductItem2
@@ -95,38 +54,8 @@ console.log(products);
               ))}
             </div>
           </div>
-          <div className="my-6">
-            <ul className="flex justify-center items-center">
-              <li
-                onClick={() => {
-                  if (pagination[0] > 1)
-                    setPagination([...pagination.map((el) => el - 1)]);
-                }}
-              >
-                <i class="fas fa-chevron-left"></i>
-              </li>
-              {pagination.map((el, i) => (
-                <li key={i} className="px-4 py-1 mx-2 bg-gray-200">
-                  <Link href={"/products?page=" + el}>
-                    <a>{el}</a>
-                  </Link>
-                </li>
-              ))}
-              <li
-                onClick={() =>
-                  pagination[pagination.length - 1] <
-                  Math.round(amountProduct.data / limit) + 1
-                    ? setPagination([...pagination.map((el) => el + 1)])
-                    : null
-                }
-              >
-                <i class="fas fa-chevron-right"></i>
-              </li>
-            </ul>
-          </div>
+          <Pagination amountProduct={amountProduct.data} />
         </div>
-        {/* phan trang */}
-
         <Footer />
       </div>
     );
